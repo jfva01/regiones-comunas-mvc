@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PruebaTecnica.Web.Models.RegionViewModel>
+
+@{
+    ViewData["Title"] = "Gestión de Regiones y Comunas";
+}
+
+<div class="container py-5">
+    <!-- Encabezado -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+            <h2 class="fw-bold">
+                Gestión de Regiones y Comunas
+            </h2>
+            <p class="text-muted mb-0">
+                Prueba Técnica .NET 8 | ASP.NET Core MVC | Web API
+            </p>
+        </div>
+    </div>
+
+    <!-- Selector Región -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            Región
+        </div>
+
+        <div class="card-body">
+            <select id="cboRegion" class="form-select">
+                <option value="">Seleccione una Región...</option>
+                @foreach(var region in Model){
+                    <option value="@region.IdRegion">
+                        @region.Nombre
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <!-- Comunas -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            Comunas
+        </div>
+        <div class="card-body">
+            <div id="mensajeInicial">
+                <p class="text-muted mb-0">
+                    Seleccione una región para visualizar sus comunas.
+                </p>
+            </div>
+            <div id="loadingComunas" class="text-center d-none">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-3">Cargando comunas...</p>
+            </div>
+            <div id="listaComunas" class="list-group d-none"></div>
+        </div>
+    </div>
+    
+    <!-- Formulario -->
+    <div id="panelEdicion" class="card shadow-sm mt-4 d-none">
+        <div class="card-header">
+            <h5>Editar comuna</h5>
+        </div>
+        <div class="card-body">
+            <!-- Formulario -->
+            <div id="alerta" class="alert d-none mt-3"></div>
+            <input type="hidden" id="txtIdComuna">
+            <div class="mb-3">
+                <label for="txtNombre" class="form-label">Nombre</label>
+                <input id="txtNombre" type="text" class="form-control">
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="txtSuperficie" class="form-label">Superficie (Km²)</label>
+                    <input id="txtSuperficie" type="number" step="0.01" class="form-control">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="txtPoblacion" class="form-label">Población</label>
+                    <input id="txtPoblacion" type="number" class="form-control">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="txtDensidad" class="form-label">Densidad</label>
+                    <input id="txtDensidad" type="number" step="0.01" class="form-control">
+                </div>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+                <button id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+                <button id="btnGuardar"  class="btn btn-primary">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
